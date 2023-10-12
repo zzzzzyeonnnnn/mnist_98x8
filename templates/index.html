@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25">
+    <title>What is this Number?!</title>
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url('/static/images/numbers.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+        }
+        .container {
+            text-align: center;
+            color: white;
+            font-family: 'Young Serif', serif;
+        }
+        .login {
+            margin: 0 auto; /* 수평 가운데 정렬 */
+            width: 300px; /* 원하는 너비로 조정 */
+            padding: 20px;
+        }
+        .login h1, .login h4 {
+            color: white;
+            font-family: 'Young Serif', serif;
+        }
+        .login form {
+            text-align: center;
+        }
+        .login input[type="file"] {
+            display: block;
+            margin: 0 auto;
+        }
+        .login input[type="submit"] {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <div class="container">
+            <h1>What's this Number?!</h1>
+            <p> </p>
+            <h4>Upload an image and Click submit</h4>
+            <form method="post" action="/predict" enctype="multipart/form-data">
+                <dl>
+                    <p style="color: white;">
+                        <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                </dl>
+                <p style="color: white;">
+                    <input type="submit" name="submit" value="Submit">
+                </p>
+            </form>
+            <p style="color: white; font-family: 'Young Serif'">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        I think this number is <h3 style="color: white;"><u>{{ messages[0] }}</u></h3><br>
+                        <img src="{{ messages[1] }}" width="300" height="255">
+                    {% endif %}
+                {% endwith %}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
